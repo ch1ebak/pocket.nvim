@@ -1,5 +1,5 @@
 # POCKET.NVIM
-A minimal, portable Neovim configuration.
+A minimal, portable, Neovim configuration.
 ![](https://raw.githubusercontent.com/ch1ebak/pocket.nvim/refs/heads/main/screenshots/pocketnvim.png)
 
 
@@ -16,7 +16,13 @@ A minimal, portable Neovim configuration.
 - [x] custom tabline
     - matches the default neovim theme
 - [x] transparency
-- [ ] LSP
+- [X] autoclose
+- [x] LSP
+    - [x] lua-ls
+    - [x] Harper
+- [X] completion
+- [X] snippets
+- [x] folding
 - [ ] better search
 
 ## Usage

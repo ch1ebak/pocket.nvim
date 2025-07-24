@@ -5,17 +5,20 @@
 --
 -- github.com/ch1ebak
 
--- KEYMAPS
--- Leader key
+
+
 local o = vim.o
 local opt = vim.opt
 local cmd = vim.cmd
 local api = vim.api
 local g = vim.g
+
+
+
+-- KEYMAPS
+-- Settings
 g.mapleader = " "
 g.maplocalleader = " "
-
--- Keymaps
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
@@ -113,6 +116,7 @@ keymap.set("i", "[", "[]<left>")
 keymap.set("i", "{", "{}<left>")
 
 
+
 -- OPTIONS
 -- Basic settings
 api.nvim_command('filetype plugin indent on')
@@ -167,7 +171,7 @@ opt.errorbells = false                         -- No error bells
 opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.mouse = "a"                                -- Mouse support
 opt.clipboard:append("unnamedplus")            -- System clipboard
-opt.path:append("**")                          -- include subdirectories in search
+opt.runtimepath:append("/usr/bin/fzf")
 
 -- Splits
 opt.splitright = true
@@ -179,13 +183,15 @@ opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Spelling
-opt.spelllang = "en,pl"                        -- Spellcheck languages
-opt.spell = true                               -- Enable spellcheck
+-- opt.spelllang = "en,pl"                        -- Spellcheck languages
+-- opt.spell = true                               -- Enable spellcheck
+
 
 -- Netrw
 g.netrw_banner = 0                             -- Disable the banner
 g.netrw_altv = 0                               -- change from left splitting to right splitting
-g.netrw_liststyle = 3                          -- tree style view in netrw
+g.netrw_list_style = 3                         -- tree style view in netrw
+
 
 -- Treesitter
 cmd("syntax off")
@@ -194,6 +200,111 @@ vim.api.nvim_create_autocmd("FileType", {
         pcall(vim.treesitter.start, ev.buf)
     end
 })
+
+
+-- Folding
+o.foldenable = true
+o.foldlevel = 99
+o.foldmethod = "expr"
+o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+
+-- LSP
+-- Lua
+vim.lsp.config['luals'] = {
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      }
+    }
+  }
+}
+vim.lsp.enable('luals')
+
+-- Harper
+vim.lsp.config['harper-ls'] = {
+  cmd = { 'harper-ls', '--stdio' },
+  filetypes = {
+    'markdown'
+  },
+  root_markers = { '.git' },
+  single_file_support = true,
+  settings = {
+    ["harper-ls"] = {
+      userDictPath = "",
+      fileDictPath = "",
+      linters = {
+        SpellCheck = true,
+        SpelledNumbers = false,
+        AnA = true,
+        SentenceCapitalization = true,
+        UnclosedQuotes = true,
+        WrongQuotes = false,
+        LongSentences = true,
+        RepeatedWords = true,
+        Spaces = true,
+        Matcher = true,
+        CorrectNumberSuffix = true
+      },
+      codeActions = {
+        ForceStable = false
+      },
+      markdown = {
+        IgnoreLinkTitle = false
+      },
+      diagnosticSeverity = "hint",
+      isolateEnglish = false,
+      dialect = "American",
+      maxFileLength = 120000
+    },
+  },
+}
+vim.lsp.enable('harper-ls')
+
+
+-- Completion
+api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = false })
+    end,
+})
+vim.lsp.completion.enable()
+
+
+-- Snippets
+---@param trigger string trigger string for snippet
+---@param body string snippet text that will be expanded
+---@param opts? vim.keymap.set.Opts
+
+function vim.snippet.add(trigger, body, opts)
+    vim.keymap.set("ia", trigger, function()
+        -- If abbrev is expanded with keys like "(", ")", "<cr>", "<space>",
+        -- don't expand the snippet. Only accept "<c-]>" as a trigger key.
+        local c = vim.fn.nr2char(vim.fn.getchar(0))
+        if c ~= "" then
+            vim.api.nvim_feedkeys(trigger .. c, "i", true)
+            return
+        end
+        vim.snippet.expand(body)
+    end, opts)
+end
+
+-- Example
+vim.snippet.add(
+    "fn",
+    "function ${1:name}($2)\n\t${3:-- content}\nend",
+    { buffer = 0 }
+)
+vim.snippet.add(
+    "lfn",
+    "local function ${1:name}($2)\n\t${3:-- content}\nend",
+    { buffer = 0 }
+)
+
 
 -- Highlight when yanking
 api.nvim_create_autocmd("TextYankPost", {
@@ -204,15 +315,19 @@ api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+
+
 -- UI
 -- Color Scheme
 o.background = "dark"
 cmd "colorscheme default"
 
+
 -- Transparency
 api.nvim_set_hl(0, "Normal", { bg = "none"})
 api.nvim_set_hl(0, "NormalNC", { bg = "none"})
 api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
+
 
 -- Tabline
 vim.opt.showtabline = 1  -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
@@ -225,7 +340,8 @@ cmd([[
   hi TabLine guibg=#1c1d23 guifg=#c4c6cd
 ]])
 
---statusline
+
+-- Statusline
 cmd "highlight StatusBG guibg=#1c1d23 guifg=#c4c6cd"
 cmd "highlight StatusLineExtra guifg=#1c1d23 guibg=#aaedb7"
 cmd "highlight StatusLineAccent guifg=#1c1d23 guibg=#ffc3fa"
