@@ -16,6 +16,8 @@ A minimal, portable Neovim configuration.
 - [x] custom tabline
     - matches the default neovim theme
 - [x] transparency
+- [ ] LSP
+- [ ] better search
 
 ## Usage
 

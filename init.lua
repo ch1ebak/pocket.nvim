@@ -178,6 +178,15 @@ opt.breakindent = true
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-- Spelling
+opt.spelllang = "en,pl"                        -- Spellcheck languages
+opt.spell = true                               -- Enable spellcheck
+
+-- Netrw
+g.netrw_banner = 0                             -- Disable the banner
+g.netrw_altv = 0                               -- change from left splitting to right splitting
+g.netrw_liststyle = 3                          -- tree style view in netrw
+
 -- Treesitter
 cmd("syntax off")
 vim.api.nvim_create_autocmd("FileType", {
@@ -185,15 +194,6 @@ vim.api.nvim_create_autocmd("FileType", {
         pcall(vim.treesitter.start, ev.buf)
     end
 })
-
--- Spelling
--- opt.spelllang = "en,pl"                        -- Spellcheck languages
--- opt.spell = true                               -- Enable spellcheck
-
--- Netrw
-g.netrw_banner = 0                             -- Disable the banner
-g.netrw_altv = 0                               -- change from left splitting to right splitting
-g.netrw_liststyle = 3                          -- tree style view in netrw
 
 -- Highlight when yanking
 api.nvim_create_autocmd("TextYankPost", {
@@ -304,16 +304,16 @@ local function filetype()
   local filetype = vim.opt.filetype:get()
 
   local map = {
-    lua = " 󰢱 LUA",
     help = " 󰋗 HELP",
-    python = " 󰌠 PYTHON",
     netrw = "  NETRW",
+    markdown = "  MARKDOWN",
+    text = " 󰀬 TEXT",
+    sh = "  SH",
+    lua = " 󰢱 LUA",
+    python = " 󰌠 PYTHON",
     rust = " 󱘗 RUST",
     php = " 󰌟 PHP",
-    sh = "  SH",
     zig = "  ZIG",
-    text = " 󰀬 TEXT",
-    markdown = "  MARKDOWN",
     typescript = " 󰛦 TYPESCRIPT",
     typescriptreact = " 󰛦 TYPESCRIPT (react)",
     javascript = " 󰌞 JAVASCRIPT",
