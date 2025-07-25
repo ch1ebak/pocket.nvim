@@ -1,7 +1,7 @@
--- ▗▄▄▖  ▗▄▖  ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖
--- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌▗▞▘▐▌     █  ▐▛▚▖▐▌▐▌  ▐▌  █  ▐▛▚▞▜▌
--- ▐▛▀▘ ▐▌ ▐▌▐▌   ▐▛▚▖ ▐▛▀▀▘  █  ▐▌ ▝▜▌▐▌  ▐▌  █  ▐▌  ▐▌
--- ▐▌   ▝▚▄▞▘▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖  █  ▐▌  ▐▌ ▝▚▞▘ ▗▄█▄▖▐▌  ▐▌
+-- ▗▄▄▖  ▗▄▖  ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▖   ▗▖  ▗▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖
+-- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌▗▞▘▐▌     █     ▐▛▚▖▐▌▐▌  ▐▌  █  ▐▛▚▞▜▌
+-- ▐▛▀▘ ▐▌ ▐▌▐▌   ▐▛▚▖ ▐▛▀▀▘  █     ▐▌ ▝▜▌▐▌  ▐▌  █  ▐▌  ▐▌
+-- ▐▌   ▝▚▄▞▘▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖  █  ▐▌ ▐▌  ▐▌ ▝▚▞▘ ▗▄█▄▖▐▌  ▐▌
 --
 -- github.com/ch1ebak
 
@@ -153,7 +153,7 @@ opt.termguicolors = true                       -- Enable 24-bit colors
 opt.showmode = false                           -- Mode in command line
 opt.conceallevel = 2                           -- Don't hide markup 
 opt.concealcursor = "nc"                       -- Don't hide cursor line markup 
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
+opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 
 -- File handling
 opt.backup = false                             -- Creating backup files
@@ -235,7 +235,7 @@ vim.lsp.config['harper-ls'] = {
   single_file_support = true,
   settings = {
     ["harper-ls"] = {
-      userDictPath = "",
+      userDictPath = "~/.config/nvim/spell/en.utf-8.add",
       fileDictPath = "",
       linters = {
         SpellCheck = true,
@@ -330,8 +330,8 @@ api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
 
 
 -- Tabline
-vim.opt.showtabline = 1  -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
-vim.opt.tabline = ''     -- Use default tabline (empty string uses built-in)
+opt.showtabline = 1  -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
+opt.tabline = ''     -- Use default tabline (empty string uses built-in)
 
 -- Transparent tabline appearance
 cmd([[
@@ -339,7 +339,6 @@ cmd([[
   hi TabLineSel guifg=#1c1d23 guibg=#aaedb7
   hi TabLine guibg=#1c1d23 guifg=#c4c6cd
 ]])
-
 
 -- Statusline
 cmd "highlight StatusBG guibg=#1c1d23 guifg=#c4c6cd"
