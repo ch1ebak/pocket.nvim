@@ -28,12 +28,12 @@ keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { de
 
 -- Files
 keymap.set("n", "<leader>.", ":Explore<cr>", { desc = "Edit config" }, opts)
-keymap.set("n", "<leader>nn", ":Explore ~/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
+keymap.set("n", "<leader>fn", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
 keymap.set("n", "<leader>,", ":e ", { desc = "Edit" }, opts)
 
 -- Sessions
 keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
-keymap.set("n", "<leader>swm", ":source ~/.local/share/nvim/session/writing-m<CR>", { desc = "Load session 1" }, opts)
+keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session 1" }, opts)
 
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
@@ -328,9 +328,9 @@ cmd "colorscheme default"
 
 
 -- Transparency
--- api.nvim_set_hl(0, "Normal", { bg = "none"})
--- api.nvim_set_hl(0, "NormalNC", { bg = "none"})
--- api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
+api.nvim_set_hl(0, "Normal", { bg = "none"})
+api.nvim_set_hl(0, "NormalNC", { bg = "none"})
+api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
 
 
 -- Tabline

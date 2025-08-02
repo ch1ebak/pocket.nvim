@@ -23,6 +23,7 @@ A minimal, portable, Neovim configuration.
 - [X] completion
 - [X] snippets
 - [x] folding
+- [X] sessions
 - [ ] better search
 
 ## Usage
@@ -40,6 +41,10 @@ git clone --depth 1 https://github.com/ch1ebak/pocket.nvim ~/.config/pocket.nvim
 - Launch
 ```
 nvim --clean -u ~/.config/pocket.nvim/init.lua
+
+# or
+
+NVIM_APPNAME=pocket.nvim nvim
 ```
 
 
