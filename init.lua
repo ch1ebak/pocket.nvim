@@ -31,6 +31,10 @@ keymap.set("n", "<leader>.", ":Explore<cr>", { desc = "Edit config" }, opts)
 keymap.set("n", "<leader>nn", ":Explore ~/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
 keymap.set("n", "<leader>,", ":e ", { desc = "Edit" }, opts)
 
+-- Sessions
+keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
+keymap.set("n", "<leader>swm", ":source ~/.local/share/nvim/session/writing-m<CR>", { desc = "Load session 1" }, opts)
+
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
@@ -159,7 +163,7 @@ opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinko
 opt.backup = false                             -- Creating backup files
 opt.swapfile = false                           -- Creating swap files
 opt.undofile = true                            -- Persistent undo
-opt.undodir = vim.fn.expand("~/.config/nvim/undodir") -- Undo directory
+opt.undodir = vim.fn.expand("~/.local/share/nvim/undodir") -- Undo directory
 opt.updatetime = 250                           -- Faster completion
 opt.timeoutlen = 500                           -- Key timeout duration
 opt.autoread = true                            -- Auto reload files changed outside vim
@@ -324,9 +328,9 @@ cmd "colorscheme default"
 
 
 -- Transparency
-api.nvim_set_hl(0, "Normal", { bg = "none"})
-api.nvim_set_hl(0, "NormalNC", { bg = "none"})
-api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
+-- api.nvim_set_hl(0, "Normal", { bg = "none"})
+-- api.nvim_set_hl(0, "NormalNC", { bg = "none"})
+-- api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
 
 
 -- Tabline
