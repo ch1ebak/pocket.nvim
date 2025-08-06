@@ -71,6 +71,13 @@ keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
 keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
 
+-- LSP
+keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
+keymap.set("n", "<leader>el", ":lua vim.lsp.enable('luals')<CR>", { desc = "Enable LSP" }, opts)
+keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
+keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = "Diagnostics"}, opts)
+keymap.set('n', '<leader>eW', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
+
 -- Spelling
 keymap.set("n", "<leader>z,", function()
   vim.opt.spell = true
@@ -158,6 +165,7 @@ opt.showmode = false                           -- Mode in command line
 opt.conceallevel = 2                           -- Don't hide markup 
 opt.concealcursor = "nc"                       -- Don't hide cursor line markup 
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
+opt.winborder = "rounded"
 
 -- File handling
 opt.backup = false                             -- Creating backup files
@@ -207,10 +215,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- Folding
-o.foldenable = true
-o.foldlevel = 99
-o.foldmethod = "expr"
-o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- o.foldenable = true
+-- o.foldlevel = 99
+-- o.foldmethod = "expr"
+-- o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 
 -- LSP
@@ -227,7 +235,6 @@ vim.lsp.config['luals'] = {
     }
   }
 }
-vim.lsp.enable('luals')
 
 -- Harper
 vim.lsp.config['harper-ls'] = {
@@ -267,7 +274,8 @@ vim.lsp.config['harper-ls'] = {
     },
   },
 }
-vim.lsp.enable('harper-ls')
+
+-- vim.lsp.enable('harper-ls', 'luals')
 
 
 -- Completion
