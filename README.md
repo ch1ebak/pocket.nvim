@@ -24,7 +24,7 @@ A minimal, portable, Neovim configuration.
 - [X] snippets
 - [x] folding
 - [X] sessions
-- [ ] better search
+- [X] better search
 
 ## Usage
 

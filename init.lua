@@ -26,17 +26,27 @@ local opts = { noremap = true, silent = true }
 keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
 keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
 
--- Files
-keymap.set("n", "<leader>.", ":Explore<cr>", { desc = "Edit config" }, opts)
+-- Find
+keymap.set("n", "<leader>.", ":find ", { desc = "Find" }, opts)
+keymap.set("n", "<leader>>", ":Explore<cr>", { desc = "Open Netrw" }, opts)
 keymap.set("n", "<leader>fn", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
-keymap.set("n", "<leader>,", ":e ", { desc = "Edit" }, opts)
+
+-- Grep
+keymap.set("n", "<leader>/", ":copen | :silent :grep ", { desc = "Grep" })
+keymap.set("n", "]q", ":cnext<CR>")
+keymap.set("n", "[q", ":cprev<CR>")
+
+-- Buffers
+keymap.set("n", "<leader>,", ":b ", { desc = "Buffers" }, opts)
+keymap.set("n", "<leader><", ":buffers<CR>", { desc = "Buffers" }, opts)
 
 -- Sessions
 keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
-keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session 1" }, opts)
+keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session" }, opts)
 
 -- Windows/Splits/Buffers
 keymap.set("n", "<C-q>", ":q<CR>", { desc = "Close" }, opts)
+keymap.set("n", "<C-c>", ":bdelete<CR>", { desc = "Close" }, opts)
 keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
@@ -75,8 +85,8 @@ keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
 keymap.set("n", "<leader>el", ":lua vim.lsp.enable('luals')<CR>", { desc = "Enable LSP" }, opts)
 keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
-keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = "Diagnostics"}, opts)
-keymap.set('n', '<leader>eW', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
+keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
+keymap.set('n', 'grd', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = "Diagnostics"}, opts)
 
 -- Spelling
 keymap.set("n", "<leader>z,", function()
@@ -125,6 +135,7 @@ keymap.set("i", "\"", "\"\"<left>")
 keymap.set("i", "(", "()<left>")
 keymap.set("i", "[", "[]<left>")
 keymap.set("i", "{", "{}<left>")
+keymap.set("i", "<", "<><left>")
 
 
 
@@ -136,13 +147,13 @@ o.fileencoding = "utf-8"
 -- Editor settings
 o.number = true                                -- Line numbers
 o.relativenumber = true                        -- Relative line numbers
-o.cursorline = true                            -- Highlight current line
+o.cursorline = false                           -- Highlight current line
 o.wrap = true                                  -- Line wrapping
 o.scrolloff = 4                                -- Keep n lines above/below cursor
 o.sidescrolloff = 4                            -- Keep n columns left/right of cursor
 g.editorconfig = false
 o.wildmenu = true
-opt.wildoptions = "fuzzy"
+opt.wildoptions = "pum"
 opt.wildmode = "longest:full,full"
 
 -- Indentation
@@ -183,6 +194,10 @@ opt.errorbells = false                         -- No error bells
 opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.mouse = "a"                                -- Mouse support
 opt.clipboard:append("unnamedplus")            -- System clipboard
+
+-- Search
+o.path = "**"
+opt.grepprg = "rg --vimgrep -uu $* ."
 opt.runtimepath:append("/usr/bin/fzf")
 
 -- Splits
@@ -200,7 +215,7 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 
 -- Netrw
-g.netrw_banner = 0                             -- Disable the banner
+g.netrw_banner = 1                             -- Netrw banner
 g.netrw_altv = 0                               -- change from left splitting to right splitting
 g.netrw_list_style = 3                         -- tree style view in netrw
 
