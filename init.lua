@@ -24,6 +24,7 @@ local opts = { noremap = true, silent = true }
 
 -- Config
 keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
+keymap.set("n", "<leader>ht", ":colorscheme ", { desc = "Change theme" }, opts)
 keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
 
 -- Find
@@ -78,15 +79,14 @@ keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" },
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
 
 -- Toggles
-keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
-keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+keymap.set("n", "<leader>ae", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
+keymap.set("n", "<leader>al", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
 
 -- LSP
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
-keymap.set("n", "<leader>el", ":lua vim.lsp.enable('luals')<CR>", { desc = "Enable LSP" }, opts)
-keymap.set("n", "<leader>ed", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
+keymap.set("n", "<leader>el", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
 keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
-keymap.set('n', 'grd', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = "Diagnostics"}, opts)
+keymap.set('n', 'grh', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
 
 -- Spelling
 keymap.set("n", "<leader>z,", function()
