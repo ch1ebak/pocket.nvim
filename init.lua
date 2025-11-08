@@ -14,7 +14,6 @@ local api = vim.api
 local g = vim.g
 
 
-
 -- KEYMAPS
 -- Settings
 g.mapleader = " "
@@ -28,7 +27,8 @@ keymap.set("n", "<leader>ht", ":colorscheme ", { desc = "Change theme" }, opts)
 keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
 
 -- Find
-keymap.set("n", "<leader>.", ":find ", { desc = "Find" }, opts)
+keymap.set("n", "<leader><leader>", ":find ", { desc = "Find" }, opts)
+keymap.set("n", "<leader>.", ":Lexplore<cr>", { desc = "Open Netrw - left split" }, opts)
 keymap.set("n", "<leader>>", ":Explore<cr>", { desc = "Open Netrw" }, opts)
 keymap.set("n", "<leader>fn", ":find /nvme/Dokumenty/notatki/", { desc = "Find in the notes folder" }, opts)
 keymap.set("n", "<leader>fN", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
@@ -234,9 +234,12 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 
 -- Netrw
+g.netrw_keepdir = 0
 g.netrw_banner = 1                             -- Netrw banner
 g.netrw_altv = 0                               -- change from left splitting to right splitting
 g.netrw_list_style = 3                         -- tree style view in netrw
+g.netrw_winsize = 20
+g.netrw_localcopydircmd = 'cp -r'
 
 
 -- Treesitter
@@ -370,9 +373,9 @@ cmd "colorscheme default"
 
 
 -- Transparency
-api.nvim_set_hl(0, "Normal", { bg = "none"})
-api.nvim_set_hl(0, "NormalNC", { bg = "none"})
-api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
+-- api.nvim_set_hl(0, "Normal", { bg = "none"})
+-- api.nvim_set_hl(0, "NormalNC", { bg = "none"})
+-- api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
 
 
 -- Tabline
