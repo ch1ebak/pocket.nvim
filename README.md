@@ -4,7 +4,8 @@ A minimal, portable, Neovim configuration.
 
 
 ## About
-> [!WARNING] TW: mentions of Emacs. I love it personally, but leaving a tw for anyone who might need it.
+> [!WARNING]
+> TW: mentions of Emacs. I love it personally, but leaving a tw for anyone who might need it.
 
 This is by no means a minimal config nor is it meant to be. I started this config because I wanted to see how many plugins I use could be replaced with Neovim's native functions. As it turns out, almost all of them.
 
