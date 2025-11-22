@@ -4,7 +4,7 @@
 -- ▐▌   ▝▚▄▞▘▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖  █  ▐▌ ▐▌  ▐▌ ▝▚▞▘ ▗▄█▄▖▐▌  ▐▌
 --
 -- github.com/ch1ebak
-
+--
 
 
 local o = vim.o
@@ -12,150 +12,6 @@ local opt = vim.opt
 local cmd = vim.cmd
 local api = vim.api
 local g = vim.g
-
-
--- KEYMAPS
--- Settings
-g.mapleader = " "
-g.maplocalleader = " "
-local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
-
--- Config
-keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
-keymap.set("n", "<leader>ht", ":colorscheme ", { desc = "Change theme" }, opts)
-keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
-
--- Find
-keymap.set("n", "<leader><leader>", ":find ", { desc = "Find" }, opts)
-keymap.set("n", "<leader>.", ":Lexplore<cr>", { desc = "Open Netrw - left split" }, opts)
-keymap.set("n", "<leader>>", ":Explore<cr>", { desc = "Open Netrw" }, opts)
-keymap.set("n", "<leader>fn", ":find /nvme/Dokumenty/notatki/", { desc = "Find in the notes folder" }, opts)
-keymap.set("n", "<leader>fN", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
-
--- Grep
-keymap.set("n", "<leader>/", ":copen | :silent :grep ", { desc = "Grep" })
-keymap.set("n", "]q", ":cnext<CR>")
-keymap.set("n", "[q", ":cprev<CR>")
-
--- Buffers
-keymap.set("n", "<leader>,", ":b ", { desc = "Buffers" }, opts)
-keymap.set("n", "<leader><", ":buffers<CR>", { desc = "Buffers" }, opts)
-
--- Sessions
-keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
-keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session" }, opts)
-
--- Windows/Splits/Buffers
-keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close" }, opts)
-keymap.set("n", "<C-c>", ":bdelete<CR>", { desc = "Close" }, opts)
-keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
-keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)
-keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
-keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" }, opts)
-keymap.set("n", "<C-j>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
-keymap.set("n", "<C-k>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
-
--- Movement
-keymap.set("n", "j", "gj", { desc = "Move by line" }, opts)
-keymap.set("n", "k", "gk", { desc = "Move by line" }, opts)
-keymap.set({ "n", "v" }, "gh", "^", { desc = "Go to the beginning line" })
-keymap.set({ "n", "v" }, "gl", "$", { desc = "Go to the end of the line" })
-keymap.set("v", "gl", "$h", { desc = "Go to the end of the line" })
-keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" }, opts)
-keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up(centered)" }, opts)
-
--- Yanking
-keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
-keymap.set("n", "J", "mzJ`z", { desc = "Combine line with the one below" }, opts)
-keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected line down" }, opts)
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected line up" }, opts)
-
--- Search
-keymap.set("n", "n", "nzzzv", { desc = "Better search next" }, opts)
-keymap.set("n", "N", "Nzzzv", { desc = "Better search previous" }, opts)
-
--- Other
-keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" }, opts)
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
-
--- Toggles
-keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
-keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
-
--- LSP
-keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
-keymap.set("n", "<leader>el", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
-keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
-keymap.set('n', 'grh', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
-
--- Spelling
-keymap.set("n", "<leader>z,", function()
-  vim.opt.spell = true
-  vim.cmd("echo 'Spellcheck enabled'")
-end, { desc = "Enable Spellcheck" })
-
-keymap.set("n", "<leader>z.", function()
-  vim.opt.spell = false
-  vim.cmd("echo 'Spellcheck disabled'")
-end, { desc = "Disable Spellcheck" })
-
-keymap.set("n", "<leader>ze", function()
-  vim.opt.spelllang = "en"
-  vim.cmd("echo 'Spell language set to English'")
-end, { desc = "Spelling language English" })
-
-keymap.set("n", "<leader>zp", function()
-  vim.opt.spelllang = "pl"
-  vim.cmd("echo 'Spell language set to Polish'")
-end, { desc = "Spelling language Polish" })
-
-keymap.set("n", "<leader>zb", function()
-  vim.opt.spelllang = "en,pl"
-  vim.cmd("echo 'Spell language set to English and Polish'")
-end, { desc = "[P]Spelling language English and Polish" })
-
-keymap.set("n", "<leader>zc", function()
-  vim.cmd("normal! 1z=")
-end, { desc = "Spelling suggestions" })
-
-keymap.set("n", "<leader>za", function()
-  vim.cmd("normal! zg")
-end, { desc = "Spelling add word to spellfile" })
-
--- Copy Full File-Path
-vim.keymap.set("n", "<leader>yc", function()
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
-	print("file:", path)
-end)
-
--- Autoclose
-keymap.set("i", "'", "''<left>")
-keymap.set("i", "\"", "\"\"<left>")
-keymap.set("i", "(", "()<left>")
-keymap.set("i", "[", "[]<left>")
-keymap.set("i", "{", "{}<left>")
-keymap.set("i", "<", "<><left>")
-
--- Focus split
-keymap.set("n", "<C-e>", function()
-    local win     = vim.api.nvim_get_current_win()
-    local wwidth  = vim.api.nvim_win_get_width(win)
-    local wheight = vim.api.nvim_win_get_height(win)
-
-    local tab_width  = vim.o.columns
-    local tab_height = vim.o.lines - vim.o.cmdheight
-
-    local focused = wwidth >= tab_width * 0.9 and wheight >= tab_height * 0.9
-    if focused then
-        vim.cmd("wincmd =") --equalize all win size
-    else
-        vim.cmd("wincmd |")
-        vim.cmd("wincmd _")
-    end
-end)
-
 
 
 -- OPTIONS
@@ -171,9 +27,7 @@ o.wrap = true                                  -- Line wrapping
 o.scrolloff = 4                                -- Keep n lines above/below cursor
 o.sidescrolloff = 4                            -- Keep n columns left/right of cursor
 g.editorconfig = false
-o.wildmenu = true
 opt.wildoptions = "pum"
-opt.wildmode = "longest:full,full"
 
 -- Indentation
 o.tabstop = 2                                  -- Tab width
@@ -192,7 +46,7 @@ o.incsearch = true                             -- Show matches as you type
 -- Visual settings
 opt.termguicolors = true                       -- Enable 24-bit colors
 opt.showmode = false                           -- Mode in command line
-opt.conceallevel = 2                           -- Don't hide markup 
+opt.conceallevel = 0                           -- Don't hide markup 
 opt.concealcursor = "nc"                       -- Don't hide cursor line markup 
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 opt.winborder = "rounded"
@@ -214,11 +68,6 @@ opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.mouse = "a"                                -- Mouse support
 opt.clipboard:append("unnamedplus")            -- System clipboard
 
--- Search
-o.path = "**"
-opt.grepprg = "rg --vimgrep -uu $* ."
-opt.runtimepath:append("/usr/bin/fzf")
-
 -- Splits
 opt.splitright = true
 opt.splitbelow = true
@@ -232,7 +81,6 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- opt.spelllang = "en,pl"                        -- Spellcheck languages
 -- opt.spell = true                               -- Enable spellcheck
 
-
 -- Netrw
 g.netrw_keepdir = 0
 g.netrw_banner = 1                             -- Netrw banner
@@ -240,7 +88,6 @@ g.netrw_altv = 0                               -- change from left splitting to 
 g.netrw_list_style = 3                         -- tree style view in netrw
 g.netrw_winsize = 20
 g.netrw_localcopydircmd = 'cp -r'
-
 
 -- Treesitter
 cmd("syntax off")
@@ -250,15 +97,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-
 -- Folding
 -- o.foldenable = true
 -- o.foldlevel = 99
 -- o.foldmethod = "expr"
 -- o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
-
 -- LSP
+-- Requires harper and lua-language-server
 -- Lua
 vim.lsp.config['luals'] = {
   cmd = { 'lua-language-server' },
@@ -312,8 +158,8 @@ vim.lsp.config['harper-ls'] = {
   },
 }
 
+-- Uncommented because I prefer to enable LSP using a keybinding whenever needed. Uncomment to keep it always enabled.
 -- vim.lsp.enable('harper-ls', 'luals')
-
 
 -- Completion
 api.nvim_create_autocmd("LspAttach", {
@@ -323,8 +169,8 @@ api.nvim_create_autocmd("LspAttach", {
 })
 vim.lsp.completion.enable()
 
-
 -- Snippets
+-- I don't really use snippets but have this just in case
 ---@param trigger string trigger string for snippet
 ---@param body string snippet text that will be expanded
 ---@param opts? vim.keymap.set.Opts
@@ -354,7 +200,6 @@ vim.snippet.add(
     { buffer = 0 }
 )
 
-
 -- Highlight when yanking
 api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
@@ -365,18 +210,15 @@ api.nvim_create_autocmd("TextYankPost", {
 })
 
 
-
 -- UI
 -- Color Scheme
 o.background = "dark"
 cmd "colorscheme default"
 
-
 -- Transparency
 -- api.nvim_set_hl(0, "Normal", { bg = "none"})
 -- api.nvim_set_hl(0, "NormalNC", { bg = "none"})
 -- api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
-
 
 -- Tabline
 opt.showtabline = 1  -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
@@ -390,6 +232,7 @@ cmd([[
 ]])
 
 -- Statusline
+-- Customized, based on https://nuxsh.is-a.dev/blog/custom-nvim-statusline.html
 cmd "highlight StatusBG guibg=#1c1d23 guifg=#c4c6cd"
 cmd "highlight StatusLineExtra guifg=#1c1d23 guibg=#aaedb7"
 cmd "highlight StatusLineAccent guifg=#1c1d23 guibg=#ffc3fa"
@@ -532,3 +375,213 @@ api.nvim_exec([[
   au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
   augroup END
 ]], false)
+
+
+-- KEYMAPS
+-- Settings
+g.mapleader = " "
+g.maplocalleader = " "
+local keymap = vim.keymap
+local opts = { noremap = true, silent = true }
+
+-- Config
+keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
+keymap.set("n", "<leader>ht", ":colorscheme ", { desc = "Change theme" }, opts)
+keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
+
+-- Find
+keymap.set("n", "<leader><leader>", ":find ", { desc = "Find" }, opts)
+keymap.set("n", "<leader>.", ":Lexplore<cr>", { desc = "Open Netrw - left split" }, opts)
+keymap.set("n", "<leader>>", ":Explore<cr>", { desc = "Open Netrw" }, opts)
+keymap.set("n", "<leader>fn", ":find /nvme/Dokumenty/notatki/", { desc = "Find in the notes folder" }, opts)
+keymap.set("n", "<leader>fN", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
+
+-- Grep
+keymap.set("n", "<leader>/", ":copen | :silent :grep ", { desc = "Grep" })
+keymap.set("n", "]q", ":cnext<CR>")
+keymap.set("n", "[q", ":cprev<CR>")
+
+-- Buffers
+keymap.set("n", "<leader>,", ":b ", { desc = "Buffers" }, opts)
+keymap.set("n", "<leader><", ":buffers<CR>", { desc = "Buffers" }, opts)
+
+-- Sessions
+keymap.set("n", "<leader>ss", ":mksession! ~/.local/share/nvim/session/", { desc = "Save session" }, opts)
+keymap.set("n", "<leader>sl", ":source ~/.local/share/nvim/session/", { desc = "Load session" }, opts)
+
+-- Windows/Splits/Buffers
+keymap.set("n", "<C-w>", ":q<CR>", { desc = "Close" }, opts)
+keymap.set("n", "<C-c>", ":bdelete<CR>", { desc = "Close" }, opts)
+keymap.set("n", "<C-n>", "<C-w>v", { desc = "Split window horizontally" }, opts)
+keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" }, opts)
+keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" }, opts)
+keymap.set("n", "<C-t>", "<cmd>tabnew<CR>", { desc = "New tab" }, opts)
+keymap.set("n", "<C-j>", "<cmd>tabn<CR>", { desc = "Next tab" }, opts)
+keymap.set("n", "<C-k>", "<cmd>tabp<CR>", { desc = "Previous tab" }, opts)
+
+-- Movement
+keymap.set("n", "j", "gj", { desc = "Move by line" }, opts)
+keymap.set("n", "k", "gk", { desc = "Move by line" }, opts)
+keymap.set({ "n", "v" }, "gh", "^", { desc = "Go to the beginning line" })
+keymap.set({ "n", "v" }, "gl", "$", { desc = "Go to the end of the line" })
+keymap.set("v", "gl", "$h", { desc = "Go to the end of the line" })
+keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" }, opts)
+keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up(centered)" }, opts)
+
+-- Yanking
+keymap.set("n", "Y", "y$", { desc = "Yank to end of line" })
+keymap.set("n", "J", "mzJ`z", { desc = "Combine line with the one below" }, opts)
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected line down" }, opts)
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected line up" }, opts)
+
+-- Search
+keymap.set("n", "n", "nzzzv", { desc = "Better search next" }, opts)
+keymap.set("n", "N", "Nzzzv", { desc = "Better search previous" }, opts)
+
+-- Other
+keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" }, opts)
+keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
+
+-- Toggles
+keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
+keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+
+-- LSP
+keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
+keymap.set("n", "<leader>el", ":lua vim.lsp.stop_client(vim.lsp.get_clients())<CR>", { desc = "Disable LSP" }, opts)
+keymap.set('n', '<leader>ew', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = "Diagnostics - all" }, opts)
+keymap.set('n', 'grh', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics - at point" }, opts)
+
+-- Spelling
+keymap.set("n", "<leader>z,", function()
+  vim.opt.spell = true
+  vim.cmd("echo 'Spellcheck enabled'")
+end, { desc = "Enable Spellcheck" })
+
+keymap.set("n", "<leader>z.", function()
+  vim.opt.spell = false
+  vim.cmd("echo 'Spellcheck disabled'")
+end, { desc = "Disable Spellcheck" })
+
+keymap.set("n", "<leader>ze", function()
+  vim.opt.spelllang = "en"
+  vim.cmd("echo 'Spell language set to English'")
+end, { desc = "Spelling language English" })
+
+keymap.set("n", "<leader>zp", function()
+  vim.opt.spelllang = "pl"
+  vim.cmd("echo 'Spell language set to Polish'")
+end, { desc = "Spelling language Polish" })
+
+keymap.set("n", "<leader>zb", function()
+  vim.opt.spelllang = "en,pl"
+  vim.cmd("echo 'Spell language set to English and Polish'")
+end, { desc = "[P]Spelling language English and Polish" })
+
+keymap.set("n", "<leader>zc", function()
+  vim.cmd("normal! 1z=")
+end, { desc = "Spelling suggestions" })
+
+keymap.set("n", "<leader>za", function()
+  vim.cmd("normal! zg")
+end, { desc = "Spelling add word to spellfile" })
+
+-- Copy Full File-Path
+vim.keymap.set("n", "<leader>yc", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	print("file:", path)
+end)
+
+-- Autoclose
+keymap.set("i", "(", "()<left>")
+keymap.set("i", "[", "[]<left>")
+keymap.set("i", "{", "{}<left>")
+keymap.set("i", "<", "<><left>")
+
+-- Focus split
+keymap.set("n", "<C-e>", function()
+    local win     = vim.api.nvim_get_current_win()
+    local wwidth  = vim.api.nvim_win_get_width(win)
+    local wheight = vim.api.nvim_win_get_height(win)
+
+    local tab_width  = vim.o.columns
+    local tab_height = vim.o.lines - vim.o.cmdheight
+
+    local focused = wwidth >= tab_width * 0.9 and wheight >= tab_height * 0.9
+    if focused then
+        vim.cmd("wincmd =") --equalize all win size
+    else
+        vim.cmd("wincmd |")
+        vim.cmd("wincmd _")
+    end
+end)
+
+-- Find
+-- Pretty much copy-pasted from https://dev.to/cherryramatis/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings-1mn5
+-- Requires nightly (0.12)
+if vim.fn.executable "rg" == 1 then
+    function _G.RgFindFiles(cmdarg, _cmdcomplete)
+        local fnames = vim.fn.systemlist('rg --files --hidden --color=never --glob="!.git"')
+        if #cmdarg == 0 then
+            return fnames
+        else
+            return vim.fn.matchfuzzy(fnames, cmdarg)
+        end
+    end
+
+    vim.o.findfunc = 'v:lua.RgFindFiles'
+end
+
+local function is_cmdline_type_find()
+    local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
+
+    return cmdline_cmd == 'find' or cmdline_cmd == 'fin'
+end
+
+vim.api.nvim_create_autocmd({ 'CmdlineChanged', 'CmdlineLeave' }, {
+    pattern = { '*' },
+    group = vim.api.nvim_create_augroup('CmdlineAutocompletion', { clear = true }),
+    callback = function(ev)
+        local function should_enable_autocomplete()
+            local cmdline_cmd = vim.fn.split(vim.fn.getcmdline(), ' ')[1]
+
+            return is_cmdline_type_find() or cmdline_cmd == 'help' or cmdline_cmd == 'h'
+        end
+
+        if ev.event == 'CmdlineChanged' and should_enable_autocomplete() then
+            vim.opt.wildmode = 'noselect:lastused,full'
+            vim.fn.wildtrigger()
+        end
+
+        if ev.event == 'CmdlineLeave' then
+            vim.opt.wildmode = 'full'
+        end
+    end
+})
+
+vim.keymap.set('c', '<C-e>', '<home><s-right><c-w>edit<end>', { desc = 'Change command to :edit' })
+vim.keymap.set('c', '<C-d>', function()
+    if not is_cmdline_type_find() then
+        vim.notify('This binding should be used with :find', vim.log.levels.ERROR)
+        return
+    end
+
+    local cmdline_arg = vim.fn.split(vim.fn.getcmdline(), ' ')[2]
+
+    if vim.uv.fs_realpath(vim.fn.expand(cmdline_arg)) == nil then
+        vim.notify('The second argument should be a valid path', vim.log.levels.ERROR)
+        return
+    end
+
+    local keys = vim.api.nvim_replace_termcodes(
+        '<C-U>edit ' .. vim.fs.dirname(cmdline_arg),
+        true,
+        true,
+        true
+    )
+    vim.fn.feedkeys(keys, 'c')
+end, { desc = 'Edit the dir for the path' })
+
+vim.keymap.set('c', '<C-n>', '<home><s-right><c-w>vs<end><CR>', { desc = 'Change command to :vs' })
+vim.keymap.set('c', '<C-t>', '<home><s-right><c-w>tabe<end><CR>', { desc = 'Change command to :tabe' })
