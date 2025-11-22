@@ -29,8 +29,8 @@ Honestly, I feel like you can see that I used Emacs for years before I switched 
 - [x] Folding
 - [X] Sessions
 - [X] Better search
-  - [x] Pretty much just this: [Custom Neovim Statusline](https://nuxsh.is-a.dev/blog/custom-nvim-statusline.html) 
-  - [X] Works only on Nightly
+  - Pretty much just this: [Native Fuzzy Finder in Neovim With Lua and Cool Bindings - DEV Community](https://dev.to/cherryramatis/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings-1mn5)
+  - Works only on Nightly
 
 
 ## Requirements
