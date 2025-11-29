@@ -4,7 +4,6 @@
 -- ▐▌   ▝▚▄▞▘▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖  █  ▐▌ ▐▌  ▐▌ ▝▚▞▘ ▗▄█▄▖▐▌  ▐▌
 --
 -- github.com/ch1ebak
---
 
 
 local o = vim.o
@@ -46,7 +45,7 @@ o.incsearch = true                             -- Show matches as you type
 -- Visual settings
 opt.termguicolors = true                       -- Enable 24-bit colors
 opt.showmode = false                           -- Mode in command line
-opt.conceallevel = 0                           -- Don't hide markup 
+opt.conceallevel = 0                           -- Hide markup 
 opt.concealcursor = "nc"                       -- Don't hide cursor line markup 
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 opt.winborder = "rounded"
@@ -387,14 +386,19 @@ local opts = { noremap = true, silent = true }
 -- Config
 keymap.set("n", "<leader>hr", ":luafile %<cr>", { desc = "Reload config" }, opts)
 keymap.set("n", "<leader>ht", ":colorscheme ", { desc = "Change theme" }, opts)
-keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
 
 -- Find
 keymap.set("n", "<leader><leader>", ":find ", { desc = "Find" }, opts)
 keymap.set("n", "<leader>.", ":Lexplore<cr>", { desc = "Open Netrw - left split" }, opts)
 keymap.set("n", "<leader>>", ":Explore<cr>", { desc = "Open Netrw" }, opts)
-keymap.set("n", "<leader>fn", ":find /nvme/Dokumenty/notatki/", { desc = "Find in the notes folder" }, opts)
+
+-- Files and folders
+keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
+keymap.set("n", "<leader>fP", ":Explore /nvme/Projekty/pocket.nvim<cr>", { desc = "Open config folder" }, opts)
+keymap.set("n", "<leader>fn", ":e /nvme/Dokumenty/notatki/<cr>:find ", { desc = "Find in the notes folder" }, opts)
 keymap.set("n", "<leader>fN", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
+keymap.set("n", "<leader>fg", ":e /nvme/Projekty/<cr>:find ", { desc = "Find in the Projects folder" }, opts)
+keymap.set("n", "<leader>fN", ":Explore /nvme/Projekty<cr>", { desc = "Projects folder" }, opts)
 
 -- Grep
 keymap.set("n", "<leader>/", ":copen | :silent :grep ", { desc = "Grep" })
@@ -439,8 +443,22 @@ keymap.set("n", "n", "nzzzv", { desc = "Better search next" }, opts)
 keymap.set("n", "N", "Nzzzv", { desc = "Better search previous" }, opts)
 
 -- Other
+keymap.set("n", "<leader>to", "gf<cmd>!feh %<CR><cmd>e#<CR>", { desc = "Open image using feh" }, opts)
+keymap.set("i", "hl", "<ESC>", { desc = "Exit insert mode" }, opts)
 keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" }, opts)
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" }, opts)
+
+local function duplicate_and_comment()
+  local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+  vim.api.nvim_feedkeys(esc, "x", false)
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+  vim.cmd(start_line .. "," .. end_line .. "yank")
+  vim.cmd((end_line + 1) .. "put")
+  vim.api.nvim_feedkeys("gv", "n", false)
+  vim.api.nvim_feedkeys("gc", "v", false)
+end
+
+keymap.set("v", "yc", duplicate_and_comment, { noremap = true, desc = "Duplicate selection and comment original" })
 
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
