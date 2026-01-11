@@ -215,9 +215,9 @@ o.background = "dark"
 cmd "colorscheme default"
 
 -- Transparency
--- api.nvim_set_hl(0, "Normal", { bg = "none"})
--- api.nvim_set_hl(0, "NormalNC", { bg = "none"})
--- api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
+api.nvim_set_hl(0, "Normal", { bg = "none"})
+api.nvim_set_hl(0, "NormalNC", { bg = "none"})
+api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"})
 
 -- Tabline
 opt.showtabline = 1  -- Always show tabline (0=never, 1=when multiple tabs, 2=always)
