@@ -5,11 +5,9 @@ A minimal, portable, Neovim configuration.
 
 ## About
 > [!WARNING]
-> TW: mentions of Emacs. I love it personally, but leaving a tw for anyone who might need it.
+> 0.12 required
 
-This is by no means a minimal config nor is it meant to be. I started this config because I wanted to see how many plugins I use could be replaced with Neovim's native functions. As it turns out, almost all of them.
-
-Honestly, I feel like you can see that I used Emacs for years before I switched to Neovim. As they say, you can quit Emacs, but Emacs won't quit you (or at least I believe someone says that). What I mean to say is that the config is large and it's growing.
+This is by no means a minimal config nor is it meant to be. I started this config because I wanted to see how many plugins I use could be replaced with Neovim's native functions.
 
 
 ## Features
@@ -30,7 +28,6 @@ Honestly, I feel like you can see that I used Emacs for years before I switched 
 - [X] Sessions
 - [X] Better search
   - Pretty much just this: [Native Fuzzy Finder in Neovim With Lua and Cool Bindings - DEV Community](https://dev.to/cherryramatis/native-fuzzy-finder-in-neovim-with-lua-and-cool-bindings-1mn5)
-  - Works only on Nightly
 
 
 ## Requirements

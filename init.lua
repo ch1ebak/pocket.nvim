@@ -15,6 +15,7 @@ local g = vim.g
 
 -- OPTIONS
 -- Basic settings
+require('vim._core.ui2').enable()
 api.nvim_command('filetype plugin indent on')
 o.fileencoding = "utf-8"
 
@@ -26,7 +27,15 @@ o.wrap = true                                  -- Line wrapping
 o.scrolloff = 4                                -- Keep n lines above/below cursor
 o.sidescrolloff = 4                            -- Keep n columns left/right of cursor
 g.editorconfig = false
+o.signcolumn = 'yes:1'
+o.confirm = true
+
+-- Completion
+o.autocomplete = true
 opt.wildoptions = "pum"
+o.pumborder = 'rounded'
+o.pummaxwidth = 40
+o.completeopt = 'menu,menuone,noselect'
 
 -- Indentation
 o.tabstop = 2                                  -- Tab width
@@ -447,6 +456,7 @@ keymap.set("n", "<leader>to", "gf<cmd>!feh %<CR><cmd>e#<CR>", { desc = "Open ima
 keymap.set("i", "hl", "<ESC>", { desc = "Exit insert mode" }, opts)
 keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Uncomment and Copy" }, opts)
 
+-- Duplicate and comment
 local function duplicate_and_comment()
   local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
   vim.api.nvim_feedkeys(esc, "x", false)
@@ -518,7 +528,7 @@ keymap.set("i", "{", "{}<left>")
 keymap.set("i", "<", "<><left>")
 
 -- Focus split
-keymap.set("n", "<C-e>", function()
+keymap.set("n", "<C-o>", function()
     local win     = vim.api.nvim_get_current_win()
     local wwidth  = vim.api.nvim_win_get_width(win)
     local wheight = vim.api.nvim_win_get_height(win)
@@ -603,3 +613,8 @@ end, { desc = 'Edit the dir for the path' })
 
 vim.keymap.set('c', '<C-n>', '<home><s-right><c-w>vs<end><CR>', { desc = 'Change command to :vs' })
 vim.keymap.set('c', '<C-t>', '<home><s-right><c-w>tabe<end><CR>', { desc = 'Change command to :tabe' })
+
+
+-- PLUGINS
+cmd.packadd('nvim.undotree')
+cmd.packadd('nvim.difftool')
