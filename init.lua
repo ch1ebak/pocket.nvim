@@ -405,12 +405,12 @@ keymap.set("n", "<leader>.", ":Lexplore<cr>", { desc = "Open Netrw - left split"
 keymap.set("n", "<leader>>", ":Explore<cr>", { desc = "Open Netrw" }, opts)
 
 -- Files and folders
-keymap.set("n", "<leader>fp", ":e /nvme/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
-keymap.set("n", "<leader>fP", ":Explore /nvme/Projekty/pocket.nvim<cr>", { desc = "Open config folder" }, opts)
-keymap.set("n", "<leader>fn", ":e /nvme/Dokumenty/notatki/<cr>:find ", { desc = "Find in the notes folder" }, opts)
-keymap.set("n", "<leader>fN", ":Explore /nvme/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
-keymap.set("n", "<leader>fg", ":e /nvme/Projekty/<cr>:find ", { desc = "Find in the Projects folder" }, opts)
-keymap.set("n", "<leader>fN", ":Explore /nvme/Projekty<cr>", { desc = "Projects folder" }, opts)
+keymap.set("n", "<leader>fp", ":e ~/Projekty/pocket.nvim/init.lua<cr>", { desc = "Edit config" }, opts)
+keymap.set("n", "<leader>fP", ":Explore ~/Projekty/pocket.nvim<cr>", { desc = "Open config folder" }, opts)
+keymap.set("n", "<leader>fn", ":e ~/Dokumenty/notatki/<cr>:find ", { desc = "Find in the notes folder" }, opts)
+keymap.set("n", "<leader>fN", ":Explore ~/Dokumenty/notatki<cr>", { desc = "Notes folder" }, opts)
+keymap.set("n", "<leader>fg", ":e ~/Projekty/<cr>:find ", { desc = "Find in the Projects folder" }, opts)
+keymap.set("n", "<leader>fN", ":Explore ~/Projekty<cr>", { desc = "Projects folder" }, opts)
 
 -- Grep
 keymap.set("n", "<leader>/", ":copen | :silent :grep ", { desc = "Grep" })
