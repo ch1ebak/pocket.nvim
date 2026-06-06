@@ -221,7 +221,7 @@ api.nvim_create_autocmd("TextYankPost", {
 -- UI
 -- Color Scheme
 o.background = "dark"
-cmd "colorscheme default"
+cmd "colorscheme catppuccin"
 
 -- Transparency
 api.nvim_set_hl(0, "Normal", { bg = "none"})
@@ -235,21 +235,21 @@ opt.tabline = ''     -- Use default tabline (empty string uses built-in)
 -- Transparent tabline appearance
 cmd([[
   hi TabLineFill guibg=NONE ctermfg=242 ctermbg=NONE
-  hi TabLineSel guifg=#1c1d23 guibg=#aaedb7
-  hi TabLine guibg=#1c1d23 guifg=#c4c6cd
+  hi TabLineSel guifg=#1e1e2e guibg=#cba6f7
+  hi TabLine guibg=#1e1e2e guifg=#a6adc8
 ]])
 
 -- Statusline
 -- Customized, based on https://nuxsh.is-a.dev/blog/custom-nvim-statusline.html
-cmd "highlight StatusBG guibg=#1c1d23 guifg=#c4c6cd"
-cmd "highlight StatusLineExtra guifg=#1c1d23 guibg=#aaedb7"
-cmd "highlight StatusLineAccent guifg=#1c1d23 guibg=#ffc3fa"
-cmd "highlight StatuslineAccent guifg=#1c1d23 guibg=#aaedb7"
-cmd "highlight StatuslineInsertAccent guifg=#1c1d23 guibg=#f4d88c"
-cmd "highlight StatuslineVisualAccent guifg=#1c1d23 guibg=#ffbcb5"
-cmd "highlight StatuslineReplaceAccent guifg=#1c1d23 guibg=#83efef"
-cmd "highlight StatuslineCmdLineAccent guifg=#1c1d23 guibg=#9fd8ff"
-cmd "highlight StatuslineTerminalAccent guifg=#1c1d23 guibg=#c4c6cd"
+cmd "highlight StatusBG guibg=#1e1e2e guifg=#a6adc8"
+cmd "highlight StatusLineExtra guifg=#1e1e2e guibg=#cba6f7"
+cmd "highlight StatusLineAccent guifg=#1e1e2e guibg=#a6e3a1"
+cmd "highlight StatuslineAccent guifg=#1e1e2e guibg=#cba6f7"
+cmd "highlight StatuslineInsertAccent guifg=#1e1e2e guibg=#f9e2af"
+cmd "highlight StatuslineVisualAccent guifg=#1e1e2e guibg=#f38ba8"
+cmd "highlight StatuslineReplaceAccent guifg=#1e1e2e guibg=#94e2d5"
+cmd "highlight StatuslineCmdLineAccent guifg=#1e1e2e guibg=#89b4fa"
+cmd "highlight StatuslineTerminalAccent guifg=#1e1e2e guibg=#a6adc8"
 
 local modes = {
   ["n"] = "NORMAL",
