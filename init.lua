@@ -476,6 +476,7 @@ keymap.set("v", "yc", duplicate_and_comment, { noremap = true, desc = "Duplicate
 -- Toggles
 keymap.set("n", "<leader>tx", "<cmd>!chmod +x %<CR>", { desc = "Chmod open file" }, opts)
 keymap.set("n", "<leader>tl", ":set wrap!<CR>", { desc = "Line wrapping" }, opts)
+keymap.set("n", "<leader>tt", ":split<CR>:term<CR>", { desc = "Terminal" }, opts)
 
 -- LSP
 keymap.set("n", "<leader>eh", ":lua vim.lsp.enable('harper-ls')<CR>", { desc = "Enable LSP" }, opts)
